@@ -1,0 +1,28 @@
+{
+  "name": "offleet",
+  "version": "1.0.0",
+  "description": "offline first dsa app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "author": "krishna",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "drizzle-kit": "^0.31.10",
+    "electron": "^41.7.1",
+    "react-dom": "^19.2.7",
+    "vite": "^6.4.3"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "better-sqlite3": "^12.10.0",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "open": "^11.0.0",
+    "react-router": "^7.16.0"
+  }
+}
