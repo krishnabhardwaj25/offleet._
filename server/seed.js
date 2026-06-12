@@ -20,8 +20,8 @@ async function seed() {
     // test cases for problem 1
     const testCases = [
         { problem_id: 1, input: '6\n', expected_output: '36\n', is_sample: 1 },
-        { problem_id: 1, input: '3\n', expected_output: '9\n', is_sample: 1 },
-        { problem_id: 1, input: '10\n', expected_output: '100\n', is_sample: 1 },
+        { problem_id: 1, input: '3\n', expected_output: '9\n', is_sample: 0 },
+        { problem_id: 1, input: '10\n', expected_output: '100\n', is_sample: 0 },
     ];
 
     for (const tc of testCases) {
