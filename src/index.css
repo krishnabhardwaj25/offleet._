@@ -1,0 +1,113 @@
+/* index.css */
+
+:root {
+    --bg: #0d1117;
+    --bg-secondary: #161b22;
+    --text: #e6edf3;
+    --text-secondary: #8b949e;
+    --border: #30363d;
+    --accent: #58a6ff;
+    --success: #3fb950;
+    --error: #f85149;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.container {
+    padding: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.btn {
+    background: var(--bg-secondary);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-color: var(--accent);
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+}
+
+.problem-list {
+    list-style: none;
+    padding: 0;
+}
+
+.problem-item {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.problem-item:hover {
+    border-color: var(--accent);
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.badge-easy { background: rgba(63, 185, 80, 0.15); color: var(--success); }
+.badge-medium { background: rgba(210, 153, 34, 0.15); color: #d29922; }
+.badge-hard { background: rgba(248, 81, 73, 0.15); color: var(--error); }
+
+.verdict {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    margin-top: 12px;
+}
+
+.verdict-AC { background: rgba(63, 185, 80, 0.15); color: var(--success); }
+.verdict-WA, .verdict-TLE, .verdict-RE, .verdict-CE { background: rgba(248, 81, 73, 0.15); color: var(--error); }
+
+.split-pane {
+    display: flex;
+    gap: 24px;
+    height: calc(100vh - 100px);
+}
+
+.split-left {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 16px;
+}
+
+.split-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}

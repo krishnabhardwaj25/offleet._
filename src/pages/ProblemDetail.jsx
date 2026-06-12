@@ -42,24 +42,41 @@ function ProblemDetailPage() {
 if (loading) return <div>Loading details...</div>;
 if (error) return <div>{error}</div>;
 
-  return (
-    <div>
-        <button onClick={()=>navigate('/')}>Back to Problems</button>
-      <h1>{problem?.title}</h1>
-      <p>{problem?.description}</p>
-      <Editor
-      height="400px"
-      language="cpp"
-      theme="vs-dark"
-      defaultValue="// write your solution here"
-      onChange={(value) => setCode(value||'')}
-    />
-      <button onClick={runCode} disabled={!problem}>Run Code</button> 
-       <button onClick={submitCode}>Submit</button>
-    
-      {verdict && <p>Verdict: {verdict}</p>}
+  
+   return (
+    <div className="container">
+        <button className="btn" onClick={() => navigate('/')} style={{ marginBottom: '16px' }}>
+            ← Back to Problems
+        </button>
+        
+        <div className="split-pane">
+            <div className="split-left">
+                <h1>{problem?.title}</h1>
+                <span className={`badge badge-${problem?.difficulty.toLowerCase()}`}>
+                    {problem?.difficulty}
+                </span>
+                <p style={{ marginTop: '16px' }}>{problem?.description}</p>
+            </div>
+            
+            <div className="split-right">
+                <Editor
+                    height="400px"
+                    language="cpp"
+                    theme="vs-dark"
+                    defaultValue="// write your solution here"
+                    onChange={(value) => setCode(value)}
+                />
+                <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+                    <button className="btn" onClick={runCode}>Run Code</button>
+                    <button className="btn btn-primary" onClick={submitCode}>Submit</button>
+                </div>
+                {verdict && (
+                    <span className={`verdict verdict-${verdict}`}>{verdict}</span>
+                )}
+            </div>
+        </div>
     </div>
-  );
+);
 }
 
 export default ProblemDetailPage;

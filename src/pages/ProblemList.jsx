@@ -29,21 +29,28 @@ function ProblemsList() {
 
 if (loading) return <div>Loading...</div>;
 if (error) return <div>{error}</div>;
-    return (
-        <div>
-            <button onClick={ () => window.api.logout()}>Logout</button>
-            <h1>Problems</h1>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              {list.map((problem, index) => (
-              <li key={problem.id}>
-               <span onClick={() => navigate(`/problems/${problem.id}`)}>
-                {index + 1}. {problem.title}
-             </span>
-           </li>
-       ))}
-            </ul>
-            <button onClick={()=>navigate('/submissions')}>View Submissions</button>
+    
+       return (
+    <div className="container">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <h1>Offleet</h1>
+            <button className="btn" onClick={() => window.api.logout()}>Logout</button>
         </div>
+        <ul className="problem-list">
+            {list.map((problem, index) => (
+                <li key={problem.id} className="problem-item" onClick={() => navigate(`/problems/${problem.id}`)}>
+                    {index + 1}. {problem.title}
+                    <span className={`badge badge-${problem.difficulty.toLowerCase()}`} style={{ marginLeft: '12px' }}>
+                        {problem.difficulty}
+                    </span>
+                </li>
+            ))}
+        </ul>
+        <button className="btn btn-primary" onClick={() => navigate('/submissions')} style={{ marginTop: '16px' }}>
+            View Submissions
+        </button>
+    </div>
+
     );
 }
 
