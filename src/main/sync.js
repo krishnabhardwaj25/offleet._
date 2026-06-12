@@ -22,7 +22,7 @@ class SyncService extends EventEmitter {
         const unsynced = db.prepare(`
             SELECT * FROM submissions 
             WHERE synced_at IS NULL 
-            AND (sync_attempts IS NULL OR sync_attempts < 5)
+            AND (sync_attempts IS NULL OR sync_attempts < 5) 
         `).all();
 
         for (const submission of unsynced) {
@@ -32,7 +32,7 @@ class SyncService extends EventEmitter {
 
     async syncSubmission(submission) {
         try {
-            const response = await fetch('http://localhost:3000/submissions', {
+            const response = await fetch('https://offleet-server.onrender.com/submissions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

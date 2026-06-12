@@ -24,7 +24,7 @@ const createWindow = () => {
 }
 
 async function syncProblems() {
-    const response = await fetch('http://localhost:3000/problems');
+    const response = await fetch('https://offleet-server.onrender.com/problems');
     const problems = await response.json();
     
     const insertProblem = db.prepare('INSERT OR REPLACE INTO problems (id, title, difficulty, description) VALUES (?, ?, ?, ?)');
@@ -68,7 +68,7 @@ ipcMain.handle('start-auth',async ()=>{
 })
 
 async function  exchangeCode(code,code_verifier){
-     const response = await fetch('http://localhost:3000/auth/google/exchange', {
+     const response = await fetch('https://offleet-server.onrender.com/auth/google/exchange', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, code_verifier })
