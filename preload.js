@@ -7,5 +7,7 @@ contextBridge.exposeInMainWorld('api', {
     runCode: (code, testCases) => ipcRenderer.invoke('run-code', code, testCases),
     submitCode : (code,problemId,testCases) => ipcRenderer.invoke('submit-code',code,problemId,testCases),
     getSubmissions : ()=> ipcRenderer.invoke('getSubmissions'),
-    startAuth : ()=> ipcRenderer.invoke('start-auth')
+    startAuth : ()=> ipcRenderer.invoke('start-auth'),
+    isLoggedIn :()=> ipcRenderer.invoke('isLoggedIn'),
+    logout : ()=> ipcRenderer.invoke('logout')
 });

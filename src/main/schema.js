@@ -62,7 +62,7 @@ function saveSubmission(problem_id, code, verdict) {
 }
 
 function getSubmission(){
-    return db.prepare('SELECT * FROM submissions ORDER BY created_at DESC').all();
+    return db.prepare('SELECT submissions.* ,problems.title FROM submissions JOIN problems ON submissions.problem_id = problems.id ORDER BY submissions.created_at DESC').all();
 }
 
 

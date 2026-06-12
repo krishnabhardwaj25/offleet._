@@ -23,6 +23,16 @@ const createWindow = () => {
   win.loadURL('http://localhost:5173');
 }
 
+ipcMain.handle('logout',()=>{
+  db.prepare('DELETE FROM users WHERE id = 1').run();
+  BrowserWindow.getAllWindows()[0].reload();
+})
+
+ipcMain.handle('isLoggedIn',()=>{
+  const tokens = getTokens();
+  return !!tokens;
+})
+
 async function syncProblems() {
     const response = await fetch('https://offleet-server.onrender.com/problems');
     const problems = await response.json();
