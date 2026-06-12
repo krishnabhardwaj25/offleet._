@@ -19,7 +19,7 @@ function ProblemDetailPage() {
 
   
      async function runCode() {
-      const sampleTestCases = problem?.testCases.filter(testCase => testCases.is_sample===1)||[];
+      const sampleTestCases = problem.testCases.filter(testCase => testCases.is_sample===1);
       const result = await window.api.runCode(code, sampleTestCases);
       setVerdict(result);
     }
