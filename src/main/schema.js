@@ -40,7 +40,7 @@ db.exec(`
 // is later getting used by problemsList.jsx 
 function getAllProblems() {
     const result =  db.prepare('SELECT * FROM problems').all();
-    console.log('problem',result);
+    
     return result;
 }
 

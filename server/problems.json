@@ -1,0 +1,153 @@
+[
+  {
+    "id": 1,
+    "title": "Two Sum",
+    "difficulty": "Easy",
+    "description": {
+      "statement": "Given an array of integers nums and an integer target, return the indices of the two numbers such that they add up to target. Exactly one solution exists.",
+      "input": "n followed by n integers, then target",
+      "output": "Two indices i and j",
+      "constraints": "2 <= n <= 10^5",
+      "example": {
+        "input": "4\n2 7 11 15\n9",
+        "output": "0 1"
+      }
+    }
+  },
+  {
+    "id": 2,
+    "title": "Subarray Sum Equals K",
+    "difficulty": "Medium",
+    "description": {
+      "statement": "Return number of continuous subarrays whose sum equals k.",
+      "input": "n, array of size n, then integer k",
+      "output": "Single integer count",
+      "constraints": "1 <= n <= 2e5",
+      "example": {
+        "input": "5\n1 1 1\n2",
+        "output": "2"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "title": "Longest Substring Without Repeating Characters",
+    "difficulty": "Medium",
+    "description": {
+      "statement": "Given a string s, return length of longest substring without repeating characters.",
+      "input": "single string s",
+      "output": "integer length",
+      "constraints": "0 <= |s| <= 1e5",
+      "example": {
+        "input": "abcabcbb",
+        "output": "3"
+      }
+    }
+  },
+  {
+    "id": 4,
+    "title": "3Sum",
+    "difficulty": "Medium",
+    "description": {
+      "statement": "Find all unique triplets in the array which sum to zero.",
+      "input": "n followed by n integers",
+      "output": "triplets (order does not matter)",
+      "constraints": "3 <= n <= 10^4",
+      "example": {
+        "input": "6\n-1 0 1 2 -1 -4",
+        "output": "[-1,-1,2] [-1,0,1]"
+      }
+    }
+  },
+  {
+    "id": 5,
+    "title": "Container With Most Water",
+    "difficulty": "Medium",
+    "description": {
+      "statement": "Given heights array, find max water container area formed by two lines.",
+      "input": "n followed by array",
+      "output": "maximum area",
+      "constraints": "2 <= n <= 10^5",
+      "example": {
+        "input": "9\n1 8 6 2 5 4 8 3 7",
+        "output": "49"
+      }
+    }
+  },
+  {
+    "id": 6,
+    "title": "Search in Rotated Sorted Array",
+    "difficulty": "Medium",
+    "description": {
+      "statement": "Find index of target in rotated sorted array, else return -1.",
+      "input": "n array target",
+      "output": "index or -1",
+      "constraints": "1 <= n <= 10^5",
+      "example": {
+        "input": "7\n4 5 6 7 0 1 2\n0",
+        "output": "4"
+      }
+    }
+  },
+  {
+    "id": 7,
+    "title": "Koko Eating Bananas",
+    "difficulty": "Medium",
+    "description": {
+      "statement": "Find minimum eating speed k such that Koko finishes all piles within h hours.",
+      "input": "n piles array h",
+      "output": "minimum k",
+      "constraints": "1 <= n <= 10^5",
+      "example": {
+        "input": "4\n3 6 7 11\n8",
+        "output": "4"
+      }
+    }
+  },
+  {
+    "id": 8,
+    "title": "Daily Temperatures",
+    "difficulty": "Medium",
+    "description": {
+      "statement": "For each day, return number of days until a warmer temperature occurs.",
+      "input": "n followed by array",
+      "output": "array of answers",
+      "constraints": "1 <= n <= 10^5",
+      "example": {
+        "input": "8\n73 74 75 71 69 72 76 73",
+        "output": "1 1 4 2 1 1 0 0"
+      }
+    }
+  },
+  {
+    "id": 9,
+    "title": "Largest Rectangle in Histogram",
+    "difficulty": "Hard",
+    "description": {
+      "statement": "Find largest rectangle area in histogram bars.",
+      "input": "n followed by heights",
+      "output": "max area",
+      "constraints": "1 <= n <= 10^5",
+      "example": {
+        "input": "6\n2 1 5 6 2 3",
+        "output": "10"
+      }
+    }
+  },
+  {
+    "id": 10,
+    "title": "Number of Islands",
+    "difficulty": "Medium",
+    "description": {
+      "statement": "Given a grid of '1' and '0', count number of islands.",
+      "input": "rows r, cols c, followed by grid rows",
+      "output": "integer count",
+      "constraints": "1 <= r,c <= 10^3",
+      "example": {
+        "input": "3 3\n1 1 0\n1 0 0\n0 0 1",
+        "output": "2"
+      }
+    }
+  }
+
+]

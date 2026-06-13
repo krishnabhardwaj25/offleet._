@@ -9,5 +9,5 @@ try{
     dbPath = path.join(__dirname, 'offleet.db');
 }
  const db = new Database(dbPath);
- console.log('DB path:', dbPath);
+ 
 module.exports = db;

@@ -10,7 +10,7 @@ function Submissions(){
         async function fetchSubmissions(){
             try{
             const response = await window.api.getSubmissions();
-            console.log('submissions:', response);
+            
             setSubList(response);
         }catch(err){
             setError('Failed to get submissions');

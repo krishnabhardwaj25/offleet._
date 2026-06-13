@@ -8,11 +8,12 @@ const http = require('http');
 const { resolve } = require('dns');
 const {net,safeStorage} = require('electron');
 const syncService = require('./src/main/sync')
+require('dotenv').config({path: require('path').join(__dirname, '.env')});
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     webPreferences:{
       preload : path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -20,7 +21,11 @@ const createWindow = () => {
     }
   })
 
-  win.loadURL('http://localhost:5173');
+   if (app.isPackaged) {
+    win.loadFile(path.join(__dirname, 'dist', 'index.html'));
+  } else {
+    win.loadURL('http://localhost:5173');
+  }
 }
 
 ipcMain.handle('logout',()=>{
@@ -51,14 +56,13 @@ async function syncProblems() {
     
     syncAll();
     const count = db.prepare('SELECT COUNT(*) as count FROM problems').get();
-    console.log('problems in local DB:', count.count);
-    console.log('problems synced');
+    
 }
 
 function getTokens() {
   try {
         const row = db.prepare('SELECT tokens FROM users WHERE id = 1').get();
-        console.log('row:', row);
+        
         if (!row) return null;
         const decrypted = safeStorage.decryptString(Buffer.from(row.tokens));
         return JSON.parse(decrypted);
@@ -108,7 +112,7 @@ async function startAuth() {
     const { default: open } = await import('open');
     const{code_verifier,code_challenge} =  generatePKCE();
     const params = new URLSearchParams({
-      client_id : process.env.GOOGLE_CLIENT_ID,
+      client_id : '356793143390-2c4epce6bfg8s50ueus3uhep5pt6d5bi.apps.googleusercontent.com',
       redirect_uri : 'http://localhost:42813',
       response_type : 'code',
       scope : 'openid email profile',
@@ -119,9 +123,9 @@ async function startAuth() {
     await open(authURL);
     
     const code = await waitForCode();
-     console.log('got code',code);
+     
     const tokens = await exchangeCode(code,code_verifier);
-    console.log('got tokens',tokens);
+    
     storeTokens(tokens);
     await syncProblems();
        BrowserWindow.getAllWindows()[0].reload();
@@ -146,7 +150,7 @@ ipcMain.handle('getSubmissions',()=>{
 
 ipcMain.handle('run-code' , async (event, code, testCases)=>{
     const verdict = await runJudge(code, testCases);
-    console.log(verdict);
+    
     return verdict;
 });
 
@@ -166,13 +170,7 @@ ipcMain.handle('ping', async () => {
 
 
 app.whenReady().then(async() => {
-   const tokens = getTokens();
-    if (tokens) {
-        console.log('user already logged in');
-    } else {
-        console.log('user not logged in');
-       
-    }
+   
     syncService.start();
   createWindow()
 

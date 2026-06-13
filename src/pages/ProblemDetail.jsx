@@ -10,6 +10,8 @@ function ProblemDetailPage() {
   const [code, setCode] = useState('// write your solution here');
   const[verdict, setVerdict] = useState(null);
   const navigate = useNavigate();
+  const description = problem?.description ? JSON.parse(problem.description) : null;
+
   useEffect(() => {
     async function loadProblem() {
       try{
@@ -30,7 +32,7 @@ function ProblemDetailPage() {
      async function runCode() {
       if(!problem) return;
       const sampleTestCases = problem.testCases.filter(tc => tc.is_sample==1);
-      console.log(sampleTestCases);
+      
       const result = await window.api.runCode(code, sampleTestCases);
       setVerdict(result);
     }
@@ -55,12 +57,20 @@ if (error) return <div>{error}</div>;
                 <span className={`badge badge-${problem?.difficulty.toLowerCase()}`}>
                     {problem?.difficulty}
                 </span>
-                <p style={{ marginTop: '16px' }}>{problem?.description}</p>
+                <p style={{ marginTop: '16px' }}>{description?.statement}</p>
+                <p><strong>Input:</strong> {description?.input}</p>
+                <p><strong>Output:</strong> {description?.output}</p>
+                <p><strong>Constraints:</strong> {description?.constraints}</p>
+                <p><strong>Example:</strong></p>
+               <pre>Input: {description?.example?.input}
+              Output: {description?.example?.output}
+              {description?.example?.explanation}</pre>
             </div>
             
             <div className="split-right">
                 <Editor
                     height="400px"
+                    width= "100%"
                     language="cpp"
                     theme="vs-dark"
                     defaultValue="// write your solution here"

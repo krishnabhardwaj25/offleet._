@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState,useEffect} from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router';
+import {HashRouter as Router, Route, Routes} from 'react-router';
 import ProblemsList from './pages/ProblemList';
 import ProblemDetail from './pages/ProblemDetail';
 import Submissions from './pages/Submissions';

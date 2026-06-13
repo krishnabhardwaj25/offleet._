@@ -22,7 +22,7 @@ class SyncService extends EventEmitter {
         const unsynced = db.prepare(`
             SELECT * FROM submissions 
             WHERE synced_at IS NULL 
-            AND (sync_attempts IS NULL OR sync_attempts < 5) 
+            
         `).all();
 
         for (const submission of unsynced) {
@@ -47,7 +47,6 @@ class SyncService extends EventEmitter {
             if (response.ok) {
                 db.prepare('UPDATE submissions SET synced_at = ? WHERE local_id = ?')
                   .run(new Date().toISOString(), submission.local_id);
-                console.log('synced submission:', submission.local_id);
             } else {
                 this.incrementAttempts(submission.local_id);
             }

@@ -6,14 +6,33 @@
   "scripts": {
     "start": "electron .",
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "dist": "vite build && electron-builder"
   },
   "author": "krishna",
   "license": "ISC",
+  "build": {
+    "appId": "com.offleet.app",
+    "productName": "Offleet",
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.js",
+      "src/main/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "directories": {
+      "output": "release"
+    }
+  },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
     "drizzle-kit": "^0.31.10",
     "electron": "^41.7.1",
+    "electron-builder": "^24.13.3",
     "react-dom": "^19.2.7",
     "vite": "^6.4.3"
   },
@@ -23,6 +42,7 @@
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "open": "^11.0.0",
+    "react": "^19.2.7",
     "react-router": "^7.16.0"
   }
 }

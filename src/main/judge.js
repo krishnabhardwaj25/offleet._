@@ -5,7 +5,7 @@ const path = require('path');
 //testcases
 async function runJudge(code,testCases) {
       const useDocker = await isDockerAvailable();
-      console.log('using docker',useDocker);
+      
       if(useDocker){
         return await runWithDocker(code,testCases);
       }
@@ -29,7 +29,7 @@ async function isDockerAvailable() {
 async function compileInDocker(runDir) {
     return new Promise((resolve) => {
         const dockerPath = runDir.replace(/\\/g, '/').replace(/^([A-Za-z]):/, (_, drive) => `/${drive.toLowerCase()}`);
-        console.log('compile dockerPath:', dockerPath);
+        
         const dockerProcess = spawn('docker', [
             'run', '--rm', '--network', 'none',
             '--memory', '256m', '--pids-limit', '50',
@@ -44,8 +44,7 @@ async function compileInDocker(runDir) {
         });
 
         dockerProcess.on('close', (code) => {
-            console.log('compile exit code:', code);
-            console.log('compile error:', errorOutput);
+            
             resolve(code === 0);
         });
 
@@ -62,12 +61,12 @@ async function runTestCaseInDocker(runDir, input) {
     const result = await Promise.race([
         new Promise((resolve, reject) => {
             const dockerPath = runDir.replace(/\\/g, '/').replace(/^([A-Za-z]):/, (_, drive) => `/${drive.toLowerCase()}`);
-             console.log('dockerPath:', dockerPath);
+             
             const dockerProcess = spawn('docker', ['run', '--rm', '--network', 'none','--memory', '256m','--pids-limit', '50', '-v', `${dockerPath}:/code`,'-i', 'gcc:latest','sh',  '-c', ' /code/temp'
             ]);
 
             processRef.current = dockerProcess;
-            console.log('docker process spawned');
+            
             dockerProcess.stdin.write(input);
             dockerProcess.stdin.end();
 
@@ -83,8 +82,7 @@ async function runTestCaseInDocker(runDir, input) {
             });
 
             dockerProcess.on('close', (code) => {
-                  console.log('docker output:', JSON.stringify(output));
-                   console.log('docker error:', JSON.stringify(errorOutput));
+                  
                 if (code === 0) {
                     resolve(output);
                 } else {
@@ -117,11 +115,11 @@ async function runTestCaseInDocker(runDir, input) {
 
 async function runWithDocker(code,testCases){
       const runDir = await fs.mkdtemp(path.join(os.tmpdir(),'offleet-'));
-      console.log(runDir);
+      
       await fs.writeFile(path.join(runDir, 'temp.cpp'), code);
-      console.log('code written:', code);
+      
        const compiled = await compileInDocker(runDir);
-       console.log('compiled:', compiled); 
+       
        if (!compiled) return 'CE';
 
       let finalVerdict = '';
@@ -176,10 +174,10 @@ async function runLocally(code, testCases) {
     } else{
         const expected_Output = testCases[i].expected_output;
         if(result.trim() === expected_Output.trim()) {
-            console.log(`test case ${i + 1}: verdict: AC`);
+            
             finalVerdict = 'AC';
         } else {
-            console.log(`test case ${i + 1}: verdict: WA`);
+            
             finalVerdict = 'WA';
             break;
         }
@@ -187,7 +185,7 @@ async function runLocally(code, testCases) {
     }
 } catch(err){
     finalVerdict = err;
-    console.log('verdict:', err);
+    
 } finally {
     await fs.unlink('temp.cpp').catch(() => {});
     await fs.unlink('temp.exe').catch(() => {});
